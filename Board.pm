@@ -8,6 +8,7 @@ use Data::Message::Board;
 use Data::Message::Board::Comment;
 use Data::Random::Person;
 use DateTime;
+use English;
 use Error::Pure qw(err);
 use Mo::utils 0.08 qw(check_isa check_required);
 use Random::Day::InThePast;
@@ -107,15 +108,18 @@ sub random {
 			}
 		}
 
-		# Comment object.
-		push @comments, Data::Message::Board::Comment->new(
-			'author' => $comment_author,
-			'date' => $self->_random_date,
-			$self->{'mode_id'} ? (
-				'id' => $self->{'cb_comment_id'}->($self),
-			) : (),
-			'message' => $self->{'cb_message'}->($self),
-		),
+		# Comment object. Only if there is random date.
+		my $date = $self->_random_date;
+		if (defined $date) {
+			push @comments, Data::Message::Board::Comment->new(
+				'author' => $comment_author,
+				'date' => $date,
+				$self->{'mode_id'} ? (
+					'id' => $self->{'cb_comment_id'}->($self),
+				) : (),
+				'message' => $self->{'cb_message'}->($self),
+			),
+		}
 	}
 
 	my $message_board = Data::Message::Board->new(
@@ -134,10 +138,19 @@ sub random {
 sub _random_date {
 	my $self = shift;
 
+	if (! defined $self->{'_random_valid_from'}) {
+		return;
+	}
+
 	my $dt = $self->{'_random_valid_from'}->random;
-	$self->{'_random_valid_from'} = Random::Day::InThePast->new(
-		'dt_from' => $dt,
-	);
+	$self->{'_random_valid_from'} = eval {
+		Random::Day::InThePast->new(
+			'dt_from' => $dt,
+		);
+	};
+	if ($EVAL_ERROR) {
+		$self->{'_random_valid_from'} = undef;
+	}
 
 	return $dt;
 }

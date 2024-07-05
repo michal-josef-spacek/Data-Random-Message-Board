@@ -23,6 +23,7 @@ requires 'Data::Message::Board' => 0;
 requires 'Data::Message::Board::Comment' => 0;
 requires 'Data::Random::Person' => 0;
 requires 'DateTime' => 0;
+requires 'English' => 0;
 requires 'Error::Pure' => 0;
 requires 'Mo::utils' => 0.08;
 requires 'Random::Day::InThePast' => 0;
