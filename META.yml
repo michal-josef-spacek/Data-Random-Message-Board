@@ -25,12 +25,13 @@ no_index:
     - xt
 requires:
   Class::Utils: 0
+  Data::Message::Board: 0
+  Data::Message::Board::Comment: 0
   Data::Random::Person: 0
   DateTime: 0
   Error::Pure: 0
   Mo::utils: 0.08
   Random::Day::InThePast: 0
-  Scalar::Util: 0
   Text::Lorem: 0
   perl: 5.8.0
 resources:
