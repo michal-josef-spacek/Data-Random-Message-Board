@@ -20,5 +20,6 @@ README
 t/Data-Random-Message-Board/01-use.t
 t/Data-Random-Message-Board/02-version.t
 t/Data-Random-Message-Board/03-new.t
+t/Data-Random-Message-Board/04-random.t
 xt/Data-Random-Message-Board/01-pod_coverage.t
 xt/Data-Random-Message-Board/02-pod.t
