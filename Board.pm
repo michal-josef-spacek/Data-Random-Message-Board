@@ -14,7 +14,7 @@ use Mo::utils 0.08 qw(check_isa check_required);
 use Random::Day::InThePast;
 use Text::Lorem;
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 sub new {
 	my ($class, @params) = @_;
