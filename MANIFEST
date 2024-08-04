@@ -17,6 +17,7 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml
 README
+SIGNATURE
 t/Data-Random-Message-Board/01-use.t
 t/Data-Random-Message-Board/02-version.t
 t/Data-Random-Message-Board/03-new.t
