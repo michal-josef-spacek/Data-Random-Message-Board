@@ -1,4 +1,4 @@
-0.02
+0.02 2025-01-08T13:47:19+01:00
  - Add check for 'people' parameter.
  - Add test for generating of Message board from list of people.
  - Support random selecting of people.
