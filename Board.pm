@@ -80,7 +80,8 @@ sub random {
 
 	my $author;
 	if (@{$self->{'people'}}) {
-		# TODO Select random people.
+		my @list = @{$self->{'people'}};
+		$author = $list[int(rand(scalar @list - 1))];
 	} else {
 		$author = $self->{'cb_person'}->($self);
 	}
@@ -96,7 +97,8 @@ sub random {
 		# Comment author.
 		my $comment_author;
 		if (@{$self->{'people'}}) {
-			# TODO Select random people.
+			my @list = @{$self->{'people'}};
+			$comment_author = $list[int(rand(scalar @list - 1))];
 		} else {
 			if ($i % 2 == 1) {
 				if (! $saved_comment_author) {
