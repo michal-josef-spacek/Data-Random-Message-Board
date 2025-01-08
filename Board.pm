@@ -10,7 +10,7 @@ use Data::Random::Person;
 use DateTime;
 use English;
 use Error::Pure qw(err);
-use Mo::utils 0.08 qw(check_isa check_required);
+use Mo::utils 0.21 qw(check_array_object check_isa check_required);
 use Random::Day::InThePast;
 use Text::Lorem;
 
@@ -67,6 +67,7 @@ sub new {
 
 	check_required($self, 'dt_start');
 	check_isa($self, 'dt_start', 'DateTime');
+	check_array_object($self, 'people', 'Data::Person', 'People');
 
 	$self->{'_random_valid_from'} = Random::Day::InThePast->new(
 		'dt_from' => $self->{'dt_start'},

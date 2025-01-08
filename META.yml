@@ -31,7 +31,7 @@ requires:
   DateTime: 0
   English: 0
   Error::Pure: 0
-  Mo::utils: 0.08
+  Mo::utils: 0.21
   Random::Day::InThePast: 0
   Text::Lorem: 0
   perl: 5.8.0

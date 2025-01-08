@@ -4,7 +4,7 @@ use warnings;
 use Data::Random::Message::Board;
 use English;
 use Error::Pure::Utils qw(clean);
-use Test::More 'tests' => 4;
+use Test::More 'tests' => 5;
 use Test::NoWarnings;
 
 # Test.
@@ -29,4 +29,14 @@ eval {
 };
 is($EVAL_ERROR, "Parameter 'dt_start' must be a 'DateTime' object.\n",
 	"Parameter 'dt_start' must be a 'DateTime' object (bad).");
+clean();
+
+# Test.
+eval {
+	Data::Random::Message::Board->new(
+		'people' => ['bad'],
+	);
+};
+is($EVAL_ERROR, "People isn't 'Data::Person' object.\n",
+	"People isn't 'Data::Person' object (bad string).");
 clean();
