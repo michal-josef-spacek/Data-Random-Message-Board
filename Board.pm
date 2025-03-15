@@ -10,6 +10,7 @@ use Data::Random::Person;
 use DateTime;
 use English;
 use Error::Pure qw(err);
+use Error::Pure::Utils qw(clean);
 use Mo::utils 0.21 qw(check_array_object check_isa check_required);
 use Random::Day::InThePast;
 use Text::Lorem;
@@ -153,6 +154,7 @@ sub _random_date {
 	};
 	if ($EVAL_ERROR) {
 		$self->{'_random_valid_from'} = undef;
+		clean();
 	}
 
 	return $dt;

@@ -25,6 +25,7 @@ requires 'Data::Random::Person' => 0;
 requires 'DateTime' => 0;
 requires 'English' => 0;
 requires 'Error::Pure' => 0;
+requires 'Error::Pure::Utils' => 0;
 requires 'Mo::utils' => 0.21;
 requires 'Random::Day::InThePast' => 0;
 requires 'Text::Lorem' => 0;
