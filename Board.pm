@@ -126,6 +126,11 @@ sub random {
 		}
 	}
 
+	# When run again and again random() date could be undef.
+	if (! defined $board_dt) {
+		return;
+	}
+
 	my $message_board = Data::Message::Board->new(
 		'author' => $author,
 		'comments' => \@comments,

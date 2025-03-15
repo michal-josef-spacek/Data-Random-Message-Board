@@ -3,7 +3,8 @@ use warnings;
 
 use Data::Person;
 use Data::Random::Message::Board;
-use Test::More 'tests' => 4;
+use DateTime;
+use Test::More 'tests' => 6;
 use Test::NoWarnings;
 
 # Test.
@@ -31,3 +32,12 @@ $obj = Data::Random::Message::Board->new(
 );
 $ret = $obj->random;
 isa_ok($ret, 'Data::Message::Board');
+
+# Test.
+$obj = Data::Random::Message::Board->new(
+	'dt_start' => DateTime->now->subtract(days => 1),
+);
+$ret = $obj->random;
+isa_ok($ret, 'Data::Message::Board');
+$ret = $obj->random;
+is($ret, undef, 'No random message board.');

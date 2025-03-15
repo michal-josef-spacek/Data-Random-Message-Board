@@ -33,6 +33,7 @@ resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Data-Random-Me
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Data-Random-Message-Board';
 resources 'repository' => 'git://github.com/michal-josef-spacek/Data-Random-Message-Board';
 test_requires 'Data::Person' => 0;
+test_requires 'DateTime' => 0;
 test_requires 'English' => 0;
 test_requires 'Error::Pure::Utils' => 0;
 test_requires 'Test::More' => 0;

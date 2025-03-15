@@ -1,5 +1,7 @@
 0.03
  - Clean error stack in case where is not needed.
+ - Fix generation of message board in case that there is no date for new message
+   board.
  - Update copyright years.
 
 0.02 2025-01-08T13:47:19+01:00
