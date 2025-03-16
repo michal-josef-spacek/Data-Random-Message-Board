@@ -1,8 +1,8 @@
 TODO
 ====
 2. Doc.
-4. Move random comment to separate module.
-5.
+5. Improve checks in Comment.
+6.
 
 Applied
 =======
@@ -11,3 +11,6 @@ OK [20250108] skim
 
 1. Check possibility of _random_date()
 OK [20250315] skim
+
+4. Move random comment to separate module.
+OK [20250316] skim
