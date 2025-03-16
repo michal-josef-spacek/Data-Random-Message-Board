@@ -5,14 +5,12 @@ use warnings;
 
 use Class::Utils qw(set_params);
 use Data::Message::Board;
-use Data::Message::Board::Comment;
+use Data::Random::Message::Board::Comment;
+use Data::Random::Message::Board::Iterator;
 use Data::Random::Person;
+use Data::Random::Utils 0.03 qw(item_from_list);
 use DateTime;
-use English;
-use Error::Pure qw(err);
-use Error::Pure::Utils qw(clean);
 use Mo::utils 0.21 qw(check_array_object check_isa check_required);
-use Random::Day::InThePast;
 use Text::Lorem;
 
 our $VERSION = 0.03;
@@ -47,11 +45,13 @@ sub new {
 		)->random)[0];
 	};
 
-	# Start date time.
-	$self->{'dt_start'} = DateTime->new(
-		'day' => 1,
-		'month' => 1,
-		'year' => ((localtime)[5] + 1900 - 1),
+	# Datetime iterator.
+	$self->{'dt_iterator'} = Data::Random::Message::Board::Iterator->new(
+		'dt_start' => DateTime->new(
+			'day' => 1,
+			'month' => 1,
+			'year' => ((localtime)[5] + 1900 - 1),
+		),
 	);
 
 	# Add id or not.
@@ -66,12 +66,18 @@ sub new {
 	# Process parameters.
 	set_params($self, @params);
 
-	check_required($self, 'dt_start');
-	check_isa($self, 'dt_start', 'DateTime');
+	check_required($self, 'dt_iterator');
+	check_isa($self, 'dt_iterator', 'Data::Random::Message::Board::Iterator');
 	check_array_object($self, 'people', 'Data::Person', 'People');
 
-	$self->{'_random_valid_from'} = Random::Day::InThePast->new(
-		'dt_from' => $self->{'dt_start'},
+	$self->{'_random_comment'} = Data::Random::Message::Board::Comment->new(
+		'cb_id' => $self->{'cb_comment_id'},
+		'cb_message' => $self->{'cb_message'},
+		'cb_person' => $self->{'cb_person'},
+		'dt_iterator' => $self->{'dt_iterator'},
+		'id' => $self->{'comment_id'},
+		'mode_id' => $self->{'mode_id'},
+		'people' => $self->{'people'},
 	);
 
 	return $self;
@@ -80,57 +86,30 @@ sub new {
 sub random {
 	my $self = shift;
 
-	my $author;
-	if (@{$self->{'people'}}) {
-		my @list = @{$self->{'people'}};
-		$author = $list[int(rand(scalar @list - 1))];
-	} else {
-		$author = $self->{'cb_person'}->($self);
-	}
-
 	# Date of message board.
-	my $board_dt = $self->_random_date;
-
-	# Generate comments.
-	my @comments;
-	my $saved_comment_author;
-	foreach my $i (1 .. $self->{'num_comments'}) {
-
-		# Comment author.
-		my $comment_author;
-		if (@{$self->{'people'}}) {
-			my @list = @{$self->{'people'}};
-			$comment_author = $list[int(rand(scalar @list - 1))];
-		} else {
-			if ($i % 2 == 1) {
-				if (! $saved_comment_author) {
-					$saved_comment_author = $self->{'cb_person'}->($self);
-				}
-				$comment_author = $saved_comment_author;
-			} else {
-				$comment_author = $author;
-			}
-		}
-
-		# Comment object. Only if there is random date.
-		my $date = $self->_random_date;
-		if (defined $date) {
-			push @comments, Data::Message::Board::Comment->new(
-				'author' => $comment_author,
-				'date' => $date,
-				$self->{'mode_id'} ? (
-					'id' => $self->{'cb_comment_id'}->($self),
-				) : (),
-				'message' => $self->{'cb_message'}->($self),
-			),
-		}
-	}
+	my $board_dt = $self->{'dt_iterator'}->iterate;
 
 	# When run again and again random() date could be undef.
 	if (! defined $board_dt) {
 		return;
 	}
 
+	# Message board author.
+	my $author;
+	if (@{$self->{'people'}}) {
+		item_from_list($self->{'people'}, \$author);
+	} else {
+		$author = $self->{'cb_person'}->($self);
+	}
+
+	# Generate message board.
+	my @comments;
+	foreach my $i (1 .. $self->{'num_comments'}) {
+		my $random_comment = $self->{'_random_comment'}->random;
+		if (defined $random_comment) {
+			push @comments, $random_comment;
+		}
+	}
 	my $message_board = Data::Message::Board->new(
 		'author' => $author,
 		'comments' => \@comments,
@@ -142,27 +121,6 @@ sub random {
 	);
 
 	return $message_board;
-}
-
-sub _random_date {
-	my $self = shift;
-
-	if (! defined $self->{'_random_valid_from'}) {
-		return;
-	}
-
-	my $dt = $self->{'_random_valid_from'}->random;
-	$self->{'_random_valid_from'} = eval {
-		Random::Day::InThePast->new(
-			'dt_from' => $dt,
-		);
-	};
-	if ($EVAL_ERROR) {
-		$self->{'_random_valid_from'} = undef;
-		clean();
-	}
-
-	return $dt;
 }
 
 1;
