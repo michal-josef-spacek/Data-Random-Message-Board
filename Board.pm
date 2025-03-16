@@ -13,7 +13,7 @@ use DateTime;
 use Mo::utils 0.21 qw(check_array_object check_isa check_required);
 use Text::Lorem;
 
-our $VERSION = 0.03;
+our $VERSION = 0.04;
 
 sub new {
 	my ($class, @params) = @_;
