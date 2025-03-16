@@ -22,6 +22,7 @@ requires 'Class::Utils' => 0;
 requires 'Data::Message::Board' => 0;
 requires 'Data::Message::Board::Comment' => 0;
 requires 'Data::Random::Person' => 0;
+requires 'Data::Random::Utils' => 0.03;
 requires 'DateTime' => 0;
 requires 'English' => 0;
 requires 'Error::Pure' => 0;
