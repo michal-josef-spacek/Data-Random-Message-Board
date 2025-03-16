@@ -1,9 +1,9 @@
-0.03
+0.03 2025-03-16T14:49:40+01:00
  - Add Comment class.
  - Add Iterator class.
  - Clean error stack in case where is not needed.
- - Fix generation of message board in case that there is no date for new message
-   board.
+ - Fix generation of message board in case that there is no date for new
+   message board.
  - Rewrite Board to Comment and Iterator.
  - Update copyright years.
 
