@@ -1,4 +1,5 @@
 Board.pm
+Board/Iterator.pm
 Changes
 CONCEPT
 inc/Module/Install.pm
@@ -18,9 +19,15 @@ MANIFEST			This list of files
 META.yml
 README
 SIGNATURE
+t/Data-Random-Message-Board-Iterator/01-use.t
+t/Data-Random-Message-Board-Iterator/02-version.t
+t/Data-Random-Message-Board-Iterator/03-new.t
+t/Data-Random-Message-Board-Iterator/04-iterate.t
 t/Data-Random-Message-Board/01-use.t
 t/Data-Random-Message-Board/02-version.t
 t/Data-Random-Message-Board/03-new.t
 t/Data-Random-Message-Board/04-random.t
+xt/Data-Random-Message-Board-Iterator/01-pod_coverage.t
+xt/Data-Random-Message-Board-Iterator/02-pod.t
 xt/Data-Random-Message-Board/01-pod_coverage.t
 xt/Data-Random-Message-Board/02-pod.t
