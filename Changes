@@ -1,4 +1,4 @@
-0.05
+0.05 2025-07-07T16:01:55+02:00
  - Fix generation of random comments. There were comment date greater than
    actual.
 
