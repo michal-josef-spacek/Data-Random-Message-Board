@@ -46,10 +46,11 @@ sub iterate {
 	}
 
 	my $dt = $self->{'_random_valid_from'}->random;
-	$dt->add('days' => 1);
+	my $new_dt_from = $dt->clone;
+	$new_dt_from->add('days' => 1);
 	$self->{'_random_valid_from'} = eval {
 		Random::Day::InThePast->new(
-			'dt_from' => $dt,
+			'dt_from' => $new_dt_from,
 		);
 	};
 	if ($EVAL_ERROR) {

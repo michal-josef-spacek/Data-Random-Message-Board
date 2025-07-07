@@ -2,7 +2,8 @@ use strict;
 use warnings;
 
 use Data::Random::Message::Board::Iterator;
-use Test::More 'tests' => 3;
+use DateTime;
+use Test::More 'tests' => 4;
 use Test::NoWarnings;
 
 # Test.
@@ -17,3 +18,14 @@ if (! defined $ret2) {
 } else {
 	is(DateTime->compare($ret1, $ret2), -1, 'First random date is older than second.');
 }
+
+# Test.
+my $today = DateTime->now;
+my $yesterday = $today->clone;
+$yesterday->subtract(days => 1);
+$obj = Data::Random::Message::Board::Iterator->new(
+	'dt_start' => $yesterday,
+);
+my $ret = $obj->iterate;
+is($ret->ymd, $today->ymd, 'Returns today YMD.');
+
