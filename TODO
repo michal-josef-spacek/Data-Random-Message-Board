@@ -1,6 +1,7 @@
 TODO
 ====
 2. Doc.
+Mention that each iterator() call returns new unique datetime.
 5. Improve checks in Comment.
 6. Improve checks in Board.
 7. Tests.
