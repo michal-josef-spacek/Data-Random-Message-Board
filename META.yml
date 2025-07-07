@@ -36,7 +36,7 @@ requires:
   Error::Pure: 0
   Error::Pure::Utils: 0
   Mo::utils: 0.21
-  Random::Day::InThePast: 0
+  Random::Day::InThePast: 0.17
   Text::Lorem: 0
   perl: 5.8.0
 resources:

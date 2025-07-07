@@ -1,4 +1,6 @@
 0.05
+ - Fix generation of random comments. There were comment date greater than
+   actual.
 
 0.04 2025-03-16T14:57:23+01:00
  - Fix dependencies.

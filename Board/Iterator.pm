@@ -8,7 +8,7 @@ use DateTime;
 use English;
 use Error::Pure::Utils qw(clean);
 use Mo::utils 0.08 qw(check_isa check_required);
-use Random::Day::InThePast;
+use Random::Day::InThePast 0.17;
 
 our $VERSION = 0.05;
 
@@ -46,6 +46,7 @@ sub iterate {
 	}
 
 	my $dt = $self->{'_random_valid_from'}->random;
+	$dt->add('days' => 1);
 	$self->{'_random_valid_from'} = eval {
 		Random::Day::InThePast->new(
 			'dt_from' => $dt,
