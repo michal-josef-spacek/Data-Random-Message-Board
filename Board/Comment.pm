@@ -9,7 +9,8 @@ use Data::Random::Message::Board::Iterator;
 use Data::Random::Person;
 use Data::Random::Utils 0.03 qw(item_from_list);
 use DateTime;
-use Mo::utils 0.21 qw(check_array_object check_isa check_required);
+use Mo::utils 0.21 qw(check_isa check_required);
+use Mo::utils::Array qw(check_array_object);
 use Text::Lorem;
 
 our $VERSION = 0.07;
@@ -58,7 +59,8 @@ sub new {
 
 	check_required($self, 'dt_iterator');
 	check_isa($self, 'dt_iterator', 'Data::Random::Message::Board::Iterator');
-	check_array_object($self, 'people', 'Data::Person', 'People');
+
+	check_array_object($self, 'people', 'Data::Person');
 
 	return $self;
 }

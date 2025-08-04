@@ -28,6 +28,7 @@ requires 'English' => 0;
 requires 'Error::Pure' => 0;
 requires 'Error::Pure::Utils' => 0;
 requires 'Mo::utils' => 0.21;
+requires 'Mo::utils::Array' => 0;
 requires 'Random::Day::InThePast' => 0.17;
 requires 'Text::Lorem' => 0;
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Data-Random-Message-Board/issues';

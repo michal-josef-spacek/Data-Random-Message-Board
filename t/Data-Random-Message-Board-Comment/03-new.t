@@ -17,6 +17,6 @@ eval {
 		'people' => ['bad'],
 	);
 };
-is($EVAL_ERROR, "People isn't 'Data::Person' object.\n",
-	"People isn't 'Data::Person' object (bad string).");
+is($EVAL_ERROR, "Parameter 'people' with array must contain 'Data::Person' objects.\n",
+	"Parameter 'people' with array must contain 'Data::Person' objects (bad string).");
 clean();
