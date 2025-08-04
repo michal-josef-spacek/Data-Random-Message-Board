@@ -10,7 +10,7 @@ use Error::Pure::Utils qw(clean);
 use Mo::utils 0.08 qw(check_isa check_required);
 use Random::Day::InThePast 0.17;
 
-our $VERSION = 0.07;
+our $VERSION = 0.08;
 
 sub new {
 	my ($class, @params) = @_;

@@ -13,7 +13,7 @@ use Mo::utils 0.21 qw(check_isa check_required);
 use Mo::utils::Array qw(check_array_object);
 use Text::Lorem;
 
-our $VERSION = 0.07;
+our $VERSION = 0.08;
 
 sub new {
 	my ($class, @params) = @_;
